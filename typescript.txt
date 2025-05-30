@@ -1,0 +1,112 @@
+1.how to do crud operation s in the postman
+Great question! CRUD operations (Create, Read, Update, Delete) are the foundation of building and testing APIs. Postman is a powerful tool for testing these operations without building a frontend first.
+
+Let me guide you on how to perform each CRUD operation in Postman, using a typical REST API structure:
+
+1. Create (POST)
+Purpose: Add new data.
+How: - Choose POST method.
+Enter the API endpoint (e.g., http://localhost:3000/users).
+Go to the Body tab, select raw & choose JSON.
+Enter payload, for example:
+{
+  "name": "John Doe",
+  "email": "john@example.com"
+}
+Click Send.
+2. Read (GET)
+Purpose: Fetch existing data.
+How:
+Choose GET method.
+For all users: http://localhost:3000/users
+For a specific user: http://localhost:3000/users/1 (replace 1 with user id).
+Click Send.
+The response will display the data.
+3. Update (PUT or PATCH)
+Purpose: Edit existing data.
+How:
+Choose PUT (to replace entire object) or PATCH (to update partial data).
+URL: http://localhost:3000/users/1 (replace 1 with the resource id).
+Go to the Body tab, select raw, choose JSON.
+payload:
+{
+  "name": "Jane Doe"
+}
+Click Send.
+4. Delete (DELETE)
+Purpose: Remove existing data.
+How:
+Choose DELETE method.
+URL: http://localhost:3000/users/1 (replace 1 with the resource id).
+Click Send.
+Tips for Using Postman with MERN Backend
+Make sure your server is running and the endpoints are correct.
+Check the API documentation or your Express routes for proper endpoint paths and required request bodies.
+Use Headers if authentication is required (e.g., add Bearer token in Authorization header).
+Summary Table
+Operation	Method	URL Example	Where to enter data?
+Create	POST	/users	Body (JSON)
+Read	GET /users /users/:id	N/A	
+Update	PUT	/users/:id	Body (JSON)
+Delete	DELETE	/users/:id	N/A
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+2.what is the use of the node ts nodemon i mean like we run the npm run dev first who dont we just run the compilation of ts to js and js app next
+Great question! Let’s break down the roles of Node, ts-node, and nodemon, and why many projects (especially Node.js + TypeScript) use the npm run dev command instead of running each step separately.
+
+1. What Are These Tools?
+Node:
+The runtime that executes JavaScript files (e.g., node index.js).
+
+TypeScript (tsc):
+Compiles TypeScript (.ts) files into JavaScript (.js) files.
+
+ts-node:
+Runs TypeScript files directly. It combines compilation and execution so you don’t need to manually compile first, then run with Node. (e.g., ts-node src/index.ts)
+
+nodemon:
+Watches your files for changes and automatically restarts the app when you save. This speeds up development since you don’t have to stop and re-run the server manually.
+
+2. Why Not Just Compile then Run?
+In classic JavaScript with Node.js:
+
+You change your code
+You run node index.js
+If you change something, you have to re-run it.
+With TypeScript:
+
+You change .ts files
+Compile with tsc (tsc command outputs .js files)
+Then run with node (node dist/index.js)
+If you change code, repeat the above steps!
+This is slow and manual.
+
+3. What Does npm run dev with ts-node & nodemon Do?
+The usual npm run dev command (in TypeScript Node.js projects) is configured to do everything for you:
+
+Watches for file changes
+Compiles TypeScript on-the-fly (with ts-node)
+Restarts the app automatically (nodemon)
+You just save files, and your server updates – no manual compile/run cycle needed!
+
+4. How does this work?
+A typical script in package.json looks like this:
+
+"scripts": {
+  "dev": "nodemon --watch src --exec ts-node src/index.ts"
+}
+nodemon watches your .ts files in src/
+When you save, it runs ts-node src/index.ts
+ts-node transpiles & runs your TypeScript in one step
+5. Summary Table
+Tool	Role	Typical Usage
+node	Runs JS files	node dist/app.js
+tsc	Compiles TS to JS	tsc
+ts-node	Runs TS files directly	ts-node src/app.ts
+Why use npm run dev with ts-node + nodemon?
+Faster workflow: Just save, and your server reloads automatically.
+No manual steps: Compile & run are handled behind the scenes.
+Ideal for development: Keeps you productive.
+If you have more questions about project setup or scripts, or want to see a real example from your MERN Fullstack Web Development Short Term course, let me know!
